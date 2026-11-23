@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",
+    "lib": ["es2022", "dom"],
+    "module": "commonjs",
+    "moduleResolution": "node10",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "types": ["node"],
+    "rootDir": "src/lib/sysorg",
+    "outDir": ".test-build"
+  },
+  "include": ["src/lib/sysorg/**/*.ts"],
+  "exclude": ["src/lib/sysorg/store.ts"]
+}

@@ -1,0 +1,186 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --alexandra-blue:      #1875FC;
+  --alexandra-blue-dark: #3865FC;
+  --alexandra-violet:    #684BFC;
+  --alexandra-bg:        #FFFFFF;
+  --alexandra-text:      #0F172A;
+
+  --sidebar-width: 260px;
+  --preview-width: 320px;
+}
+
+/* ── Gradient border animation ─────────────────────── */
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes border-rotate {
+  to { --border-angle: 360deg; }
+}
+
+/* Default: gray border */
+.gradient-card {
+  border: 2px solid #E2E8F0;
+  background: white;
+}
+
+/* Hover: static gradient border, no animation */
+.gradient-card:hover {
+  border: 2px solid transparent;
+  background:
+    linear-gradient(white, white) padding-box,
+    linear-gradient(135deg, #1875FC 0%, #3865FC 45%, #684BFC 100%) border-box;
+}
+
+/* Selected: static gradient border + light blue bg */
+.gradient-card--selected {
+  border: 2px solid transparent !important;
+  background:
+    linear-gradient(#EEF4FF, #EEF4FF) padding-box,
+    linear-gradient(135deg, #1875FC 0%, #3865FC 45%, #684BFC 100%) border-box !important;
+  animation: none !important;
+}
+
+body {
+  font-family: var(--font-geist-sans), 'Inter', system-ui, sans-serif;
+  @apply bg-gray-50 antialiased;
+  color: var(--alexandra-text);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { @apply bg-transparent; }
+::-webkit-scrollbar-thumb { @apply bg-gray-300 rounded-full; }
+::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
+
+.studio-surface {
+  background:
+    radial-gradient(ellipse at 10% 5%, #eef4ff 0%, transparent 42%),
+    radial-gradient(ellipse at 95% 85%, #f3edff 0%, transparent 42%),
+    #fdfdff;
+}
+
+.studio-focus:focus-visible,
+.brand-entry:focus-visible {
+  outline: 3px solid #684bfc;
+  outline-offset: 5px;
+}
+
+.brand-entry { transition: background-color 200ms; }
+.brand-entry:hover { background-color: rgb(255 255 255 / 65%); }
+
+/* A belépés felirat csak ráhúzásra vagy fókuszra látszik; érintőképernyőn mindig. */
+.brand-cta {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 200ms, transform 200ms;
+}
+.brand-entry:hover .brand-cta,
+.brand-entry:focus-visible .brand-cta {
+  opacity: 1;
+  transform: none;
+}
+@media (hover: none) {
+  .brand-cta { opacity: 1; transform: none; }
+}
+
+.studio-gradient-text {
+  color: #684bfc;
+  background: linear-gradient(110deg, #1875fc, #803acb);
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.studio-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  border: 1px solid #e6e8f0;
+  border-radius: 1.5rem;
+  background: rgb(255 255 255 / 92%);
+  box-shadow: 0 8px 36px -24px rgb(34 38 79 / 18%);
+}
+
+.studio-card-active {
+  border-color: #cddbf9;
+  transition: box-shadow 200ms, border-color 200ms;
+}
+.studio-card-active:hover,
+.studio-card-active:focus-within {
+  border-color: #a7b9f4;
+  box-shadow: 0 14px 40px -24px rgb(61 77 163 / 32%);
+}
+
+.studio-primary {
+  background: linear-gradient(110deg, #1765db, #684bdf);
+  transition: box-shadow 200ms;
+}
+.studio-primary:hover:not(:disabled) { box-shadow: 0 5px 18px -5px rgb(83 69 190 / 50%); }
+
+.studio-map {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+  margin: 1.5rem 0;
+  padding: 1rem 0.5rem;
+  border-radius: 1rem;
+  background-size: 16px 16px;
+  background-image: radial-gradient(#dbe4f3 1px, transparent 1px);
+}
+.studio-map-analysis { background-image: radial-gradient(#e5dff2 1px, transparent 1px); }
+.studio-map-node {
+  padding: 0.6rem 0.5rem;
+  border: 1px solid #dfe6f3;
+  border-radius: 0.6rem;
+  background: white;
+  font-size: 0.65rem;
+  color: #52617a;
+  white-space: nowrap;
+}
+.studio-map-node-main {
+  border-color: #bbd2fb;
+  background: #edf4ff;
+  color: #2555a4;
+  box-shadow: 0 4px 12px -6px #9db5e5;
+}
+.studio-map-analysis .studio-map-node-main {
+  border-color: #d7c6f4;
+  background: #f5efff;
+  color: #7543a7;
+  box-shadow: none;
+}
+.studio-map i { width: 1.5rem; height: 1px; background: #c8d7f0; }
+.studio-map-analysis i { background: #daccef; }
+
+.studio-reset-dialog { width: min(30rem, calc(100% - 2rem)); }
+.studio-reset-dialog::backdrop { background: rgb(15 23 42 / 45%); backdrop-filter: blur(4px); }
+
+@keyframes studio-arrive {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes studio-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .studio-enter { animation: studio-arrive 450ms ease-out both; }
+  /* Átlátszóság-animáció, ami végén nem hoz létre új rétegkontextust (a logó fehér háttere így beleolvad). */
+  .studio-fade { animation: studio-fade 450ms ease-out backwards; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .studio-surface *, .studio-surface *::before, .studio-surface *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
