@@ -12,9 +12,11 @@ Belépés: a nyitóoldalon a logóra kattintva a területválasztóhoz jutsz.
 Szükséges: [Node.js](https://nodejs.org) 20 vagy újabb.
 
 ```bash
-npm install
+npm ci             # pontosan a package-lock.json szerinti függőségek telepítése
 npm run dev        # fejlesztői szerver: http://localhost:3000
 ```
+
+Fontos: a `package.json` több függősége `latest` címkén áll, ezért az egyező verziókat a `package-lock.json` biztosítja. Telepítéshez használd az `npm ci` parancsot, ne az `npm install`-t, és a lock-fájlt mindig commitold.
 
 Éles build kipróbálása: `npm run build`, majd `npm start`.
 
@@ -44,7 +46,17 @@ Cél: kiderüljön, hogy a kérdéssor és az eredmények egy **valós rendszers
 
 Hibát vagy javaslatot GitHub Issue-ként jelezz (ha nem megy, e-mailben a leírás és a böngésző neve elég).
 
+## Verziózás és munkafolyamat
+
+- **Alkalmazás verziója:** [SemVer](https://semver.org/lang/hu/) (`MAJOR.MINOR.PATCH`), a `package.json` `version` mezője és a git-címke (`v0.1.0`) egyezik. A 0.x verziók alatt a változások még törhetik a kompatibilitást. Minden kiadás bekerül a [`CHANGELOG.md`](CHANGELOG.md) fájlba.
+- **Adatformátum verziója:** a rendszerszervezési JSON-export saját `version` mezőt használ (jelenleg 1), ez független az alkalmazás verziójától. Ha a modell változik, ez nő, és a régi exportok betöltése migrációval marad működőképes.
+- **Ágak:** a `main` mindig működő, kipróbálható állapot. Új munka külön ágon készül (`funkcio/<név>` vagy `javitas/<név>`), és pull requesten keresztül kerül a `main`-be.
+- **Commit-üzenetek:** rövid, magyar, a változás lényegét leíró első sor, szükség esetén kifejtéssel.
+- **Kiadás:** `package.json` verzió emelése, `CHANGELOG.md` frissítése, majd `git tag -a vX.Y.Z -m "..."` és `git push --tags`.
+- **Ellenőrzés commit előtt:** `npm run test:sysorg` és `npm run build`.
+
 ## Dokumentáció
 
-- [`architekt-projekt-koncepcio.md`](architekt-projekt-koncepcio.md) – a projekt koncepciója
+- [`architekt-projekt-koncepcio.md`](architekt-projekt-koncepcio.md) – a projekt koncepciója és jelenlegi állapota
 - [`layer1-roadmap.md`](layer1-roadmap.md) – fejlesztési terv és a rendszerszervezési modul felépítése
+- [`CHANGELOG.md`](CHANGELOG.md) – kiadások és változások
