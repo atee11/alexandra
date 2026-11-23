@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import { useRef, useSyncExternalStore } from 'react';
 import Image from 'next/image';
@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { ArrowLeft, ArrowRight, Check, GitBranch, Layers3, ShieldCheck, Sparkles } from 'lucide-react';
 import { useProjectStore } from '@/lib/store';
 import { useSysorgStore } from '@/lib/sysorg/store';
+import { asset } from '@/lib/utils';
 
 const subscribeToHydration = (notify: () => void) =>
   useProjectStore.persist.onFinishHydration(notify);
@@ -52,7 +53,7 @@ export default function StudioPage() {
       <div className="relative mx-auto max-w-5xl">
         <header className="flex items-center justify-between gap-4">
           <Link href="/" className="studio-focus flex items-center gap-2 rounded-xl" aria-label="Alexandra – nyitóoldal">
-            <Image src="/logo-mark-tight.png" alt="" width={40} height={36} />
+            <Image src={asset('/logo-mark-tight.png')} alt="" width={40} height={36} />
             <span className="text-lg font-semibold tracking-[0.12em] text-purple-800">Alexandra</span>
           </Link>
           <span className="text-xs font-medium uppercase tracking-[0.18em] text-slate-500">Tervezőtér</span>

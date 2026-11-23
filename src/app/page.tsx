@@ -1,6 +1,7 @@
-import Image from 'next/image';
+﻿import Image from 'next/image';
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
+import { asset } from '@/lib/utils';
 
 export default function LandingPage() {
   return (
@@ -8,7 +9,7 @@ export default function LandingPage() {
       <div className="studio-fade relative flex flex-col items-center text-center">
         <Link href="/studio" className="brand-entry group max-w-full rounded-3xl px-3 pb-7 pt-2 sm:px-8" aria-label="Alexandra – belépés a tervezőtérbe">
           <Image
-            src="/logo-mark.png"
+            src={asset('/logo-mark.png')}
             alt=""
             width={280}
             height={280}

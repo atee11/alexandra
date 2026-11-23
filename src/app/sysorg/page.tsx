@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -12,6 +12,7 @@ import { L, TOPICS, topicHref } from '@/lib/sysorg/topics';
 import { useHydrated } from '@/components/sysorg/Shell';
 import { ImportControl, exportProjectJson } from '@/components/sysorg/ImportControl';
 import { ConfirmDialog, Notice, buttonClass, primaryButtonClass } from '@/components/sysorg/ui';
+import { asset } from '@/lib/utils';
 
 const STEPS = ['Kerettől a célig', 'Folyamatok és szabályok', 'Adatok és jogosultságok', 'Felülvizsgálat és export'];
 
@@ -84,7 +85,7 @@ export default function SysorgStart() {
       <div className="mx-auto max-w-5xl">
         <header className="flex items-center justify-between gap-4">
           <Link href="/studio" className="studio-focus flex items-center gap-2 rounded-xl" aria-label="Alexandra – vissza a területválasztóhoz">
-            <Image src="/logo-mark-tight.png" alt="" width={40} height={36} />
+            <Image src={asset('/logo-mark-tight.png')} alt="" width={40} height={36} />
             <span className="text-lg font-semibold tracking-[0.12em] text-purple-800">Alexandra</span>
           </Link>
           <Link href="/studio" className="studio-focus inline-flex items-center gap-2 rounded-lg text-xs font-medium text-slate-500 hover:text-violet-700"><ArrowLeft size={14} aria-hidden="true" />Területválasztó</Link>

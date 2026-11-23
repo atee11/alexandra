@@ -46,6 +46,23 @@ Cél: kiderüljön, hogy a kérdéssor és az eredmények egy **valós rendszers
 
 Hibát vagy javaslatot GitHub Issue-ként jelezz (ha nem megy, e-mailben a leírás és a böngésző neve elég).
 
+## Kiadás GitHub Pages-re
+
+Az alkalmazás statikus oldalként is kiadható, szerver nélkül, mert minden adat a böngészőben marad. A kiadást a [`.github/workflows/pages.yml`](.github/workflows/pages.yml) végzi minden `main`-re érkező változás után (egységtesztek, majd éles build).
+
+Egyszeri beállítás a GitHubon: **Settings → Pages → Build and deployment → Source: GitHub Actions**. Utána az oldal itt érhető el: `https://atee11.github.io/alexandra/`.
+
+Helyi kipróbálás ugyanazzal a statikus kimenettel (PowerShell):
+
+```powershell
+$env:GITHUB_PAGES = "true"; npm run build   # a kimenet az out/ mappába kerül
+```
+
+Tudnivalók:
+- A Pages-kiadás az `/alexandra/` alkönyvtárban fut, ezért a statikus export külön beállítást használ (`GITHUB_PAGES=true`). A helyi `npm run dev` és `npm start` ettől független, változatlan.
+- Az oldal `noindex` jelzést kap, hogy a keresők ne listázzák, de ez nem védelem: a cím ismeretében bárki megnyithatja.
+- A böngésző útvonal-előtöltő kérései a statikus kiadásban 404-et adhatnak a konzolon. Ez kozmetikai, a navigáció hibátlanul működik.
+
 ## Verziózás és munkafolyamat
 
 - **Alkalmazás verziója:** [SemVer](https://semver.org/lang/hu/) (`MAJOR.MINOR.PATCH`), a `package.json` `version` mezője és a git-címke (`v0.1.0`) egyezik. A 0.x verziók alatt a változások még törhetik a kompatibilitást. Minden kiadás bekerül a [`CHANGELOG.md`](CHANGELOG.md) fájlba.

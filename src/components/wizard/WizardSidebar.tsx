@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { usePathname, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -7,6 +7,7 @@ import { STEP_LABELS } from '@/lib/constants';
 import type { WizardStep } from '@/lib/types';
 import { CheckCircle2, Circle, Lock } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { asset } from '@/lib/utils';
 
 export function WizardSidebar() {
   const pathname = usePathname();
@@ -21,7 +22,7 @@ export function WizardSidebar() {
       {/* Logo */}
       <div className="px-5 py-4 border-b border-gray-200">
         <Link href="/studio" aria-label="Alexandra – vissza a területválasztóhoz" className="studio-focus flex items-center gap-1.5 rounded-lg">
-          <Image src="/logo-mark-tight.png" alt="Alexandra" width={36} height={32} className="shrink-0" />
+          <Image src={asset('/logo-mark-tight.png')} alt="Alexandra" width={36} height={32} className="shrink-0" />
           <div style={{ width: 'fit-content', textAlign: 'center' }}>
             <h1 className="font-semibold font-geist leading-none"
                 style={{ color: 'oklch(43.8% 0.218 303.724)', letterSpacing: '3.16px', fontSize: '16px' }}>

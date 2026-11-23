@@ -4,6 +4,13 @@ A formátum a [Keep a Changelog](https://keepachangelog.com/hu/1.1.0/) elveit k�
 
 ## [Nem kiadott]
 
+### Hozzáadva
+- Kiadás GitHub Pages-re (`.github/workflows/pages.yml`): statikus export az `/alexandra/` alkönyvtárban, `noindex` jelzéssel.
+
+### Módosítva
+- A `/wizard/[step]` útvonal statikusan előre legenerált, ismeretlen lépés 404-et ad.
+- Az architektúra-varázsló lépésválasztó komponense a `src/components/wizard/StepRouter.tsx` fájlba került.
+
 ## [0.1.0] – 2026-11-23
 
 Első verzió, szakmai kipróbálásra.

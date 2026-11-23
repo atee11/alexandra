@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 import { useEffect, useMemo, useState, useSyncExternalStore, type ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,6 +11,7 @@ import { STORE_KEY, useSaveFailed, useSysorgStore } from '@/lib/sysorg/store';
 import { TOPICS, topicHref } from '@/lib/sysorg/topics';
 import { TOPIC_IDS, type SysorgProject, type TopicId } from '@/lib/sysorg/schema';
 import { Notice } from './ui';
+import { asset } from '@/lib/utils';
 
 const subscribe = (notify: () => void) => useSysorgStore.persist.onFinishHydration(notify);
 const snapshot = () => useSysorgStore.persist.hasHydrated();
@@ -101,7 +102,7 @@ export function SysorgShell({ children }: { children: ReactNode }) {
     <div className="studio-surface flex min-h-screen flex-col md:h-screen md:flex-row md:overflow-hidden">
       <aside className="hidden w-72 shrink-0 flex-col border-r border-slate-200 bg-white/90 md:flex">
         <Link href="/studio" className="studio-focus m-3 flex items-center gap-2 rounded-xl p-2" aria-label="Alexandra – vissza a területválasztóhoz">
-          <Image src="/logo-mark-tight.png" alt="" width={36} height={32} />
+          <Image src={asset('/logo-mark-tight.png')} alt="" width={36} height={32} />
           <span>
             <span className="block text-base font-semibold tracking-[0.12em] text-purple-800">Alexandra</span>
             <span className="block text-xs text-slate-500">Rendszerszervezés</span>
@@ -119,7 +120,7 @@ export function SysorgShell({ children }: { children: ReactNode }) {
 
       <div className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 md:hidden">
         <div className="flex items-center gap-2 px-3 py-2">
-          <Link href="/studio" className="studio-focus rounded-lg p-1" aria-label="Alexandra – vissza a területválasztóhoz"><Image src="/logo-mark-tight.png" alt="" width={33} height={30} /></Link>
+          <Link href="/studio" className="studio-focus rounded-lg p-1" aria-label="Alexandra – vissza a területválasztóhoz"><Image src={asset('/logo-mark-tight.png')} alt="" width={33} height={30} /></Link>
           <button type="button" onClick={() => setMenuOpen(!menuOpen)} aria-expanded={menuOpen} aria-controls="sysorg-mobile-nav" className="studio-focus flex min-w-0 flex-1 items-center justify-between gap-2 rounded-xl border border-slate-200 px-3 py-2 text-left text-sm">
             <span className="truncate">{currentTopic ? `${currentTopic.number}. ${currentTopic.label}` : 'Eredmények és export'}</span>
             {menuOpen ? <X size={16} aria-hidden="true" /> : <Menu size={16} aria-hidden="true" />}
